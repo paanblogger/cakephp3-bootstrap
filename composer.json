@@ -1,0 +1,11 @@
+{
+    "name": "paanblogger/cakephp3-bootstrap-bake",
+    "description": "Custom libraries for CakePHP 3.x framework",
+    "type": "cakephp-plugin",
+    "keywords" : ["cakephp", "libraries"],
+    "homepage": "https://github.com/paanblogger/cakephp3-bootstrap-bake",
+    "license": "MIT",
+    "require": {
+        "cakephp/cakephp": "~3.1"
+    },
+}
