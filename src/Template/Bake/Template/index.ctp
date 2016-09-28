@@ -1,4 +1,4 @@
-<?php $this->Html->addCrumb(__("Manage News") , ['controller' => 'News' , 'action' => 'index' , 'prefix' => 'admin']); ?>
+<?php $this->Html->addCrumb(__("<%= ucfirst($pluralHumanName) %>") , ['controller' => '<%= ucfirst($pluralVar) %>' , 'action' => 'index' , 'prefix' => 'admin']); ?>
 <div class="row">
 	<div class="col-md-12">
 		<div class="panel panel-default">
@@ -6,22 +6,24 @@
 				<div class="panel-title"><h3><?php echo (isset($page_title) ? $page_title : ""); ?></h3></div>
 			</div>
 			<div class="panel-body">
-				<p><?php echo $this->Html->link(__("Add New News") , array("controller" => "News" , "action" => "add") , array("class" => "btn btn-default")); ?></p>
+				<p><?php echo $this->Html->link(__("Add New <%= ucfirst($pluralHumanName) %>") , array("controller" => "<%= ucfirst($pluralVar) %>" , "action" => "add") , array("class" => "btn btn-default")); ?></p>
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
 							<tr>
-								<th><?php echo __("Title"); ?></th>
-								<th><?php echo __("Created"); ?></th>
-								<th></th>
+				<%	foreach ($fields as $field) { %>
+				<th><?php echo __("<%= $field %>"); ?></th>
+				<% } %>
+				<th></th>
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach($news as $row) {?>
+							<?php foreach($<%= $pluralVar %> as $row) {?>
 							<tr>
-								<td><?php echo $row->title; ?></td>
-								<td><?php echo $this->Time->format($row->created , "HH:mm dd-MM-yyyy"); ?></td>
-								<td>
+				<%	foreach ($fields as $field) { %>
+				<td><% if(in_array($schema->columnType($field), ['date', 'datetime'])) { %> <?php echo $this->Time->format($row-><%= $field %> , "HH:mm dd-MM-yyyy"); ?> <% } else { %> <?php echo $row-><%= $field %>;?> <% } %></td>
+				<% } %>
+				<td>
 									<div class="btn-group">
 									<?php echo $this->Html->link(__("Edit") , array("action" => "edit" , $row->id) , array("class" => "btn btn-default btn-xs"));?>
 									<?php echo $this->Html->link(__("Delete") , array("action" => "delete" , $row->id) , array("class" => "btn btn-danger btn-xs" , "confirm" => "Confirm delete ?"));?>
