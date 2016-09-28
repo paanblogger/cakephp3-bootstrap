@@ -1,4 +1,4 @@
-<?php $this->Html->addCrumb(__("<%= ucfirst($pluralHumanName) %>") , ['controller' => '<%= ucfirst($pluralVar) %>' , 'action' => 'index' , 'prefix' => 'admin']); ?>
+<?php $this->Html->addCrumb(__("<%= ucfirst($pluralHumanName) %>") , ['controller' => '<%= ucfirst($pluralVar) %>' , 'action' => 'index']); ?>
 <div class="row">
 	<div class="col-md-12">
 		<div class="panel panel-default">
