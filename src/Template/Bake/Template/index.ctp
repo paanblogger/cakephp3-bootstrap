@@ -18,15 +18,40 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach($<%= $pluralVar %> as $row) {?>
+							<?php foreach($<%= $pluralVar %> as $<%= $singularVar %>) {?>
 							<tr>
-				<%	foreach ($fields as $field) { %>
-				<td><% if(in_array($schema->columnType($field), ['date', 'datetime'])) { %> <?php echo $this->Time->format($row-><%= $field %> , "HH:mm dd-MM-yyyy"); ?> <% } else { %> <?php echo $row-><%= $field %>;?> <% } %></td>
-				<% } %>
+<%        foreach ($fields as $field) {
+            $isKey = false;
+            if (!empty($associations['BelongsTo'])) {
+                foreach ($associations['BelongsTo'] as $alias => $details) {
+                    if ($field === $details['foreignKey']) {
+                        $isKey = true;
+%>
+                <td><?= $<%= $singularVar %>->has('<%= $details['property'] %>') ? $this->Html->link($<%= $singularVar %>-><%= $details['property'] %>-><%= $details['displayField'] %>, ['controller' => '<%= $details['controller'] %>', 'action' => 'view', $<%= $singularVar %>-><%= $details['property'] %>-><%= $details['primaryKey'][0] %>]) : '' ?></td>
+<%
+                        break;
+                    }
+                }
+            }
+            if ($isKey !== true) {
+                if (!in_array($schema->columnType($field), ['integer', 'biginteger', 'decimal', 'float'])) {
+%>
+                <td><?= h($<%= $singularVar %>-><%= $field %>) ?></td>
+<%
+                } else {
+%>
+                <td><?= $this->Number->format($<%= $singularVar %>-><%= $field %>) ?></td>
+<%
+                }
+            }
+        }
+
+        $pk = '$' . $singularVar . '->' . $primaryKey[0];
+%>
 				<td>
 									<div class="btn-group">
-									<?php echo $this->Html->link(__("Edit") , array("action" => "edit" , $row->id) , array("class" => "btn btn-default btn-xs"));?>
-									<?php echo $this->Html->link(__("Delete") , array("action" => "delete" , $row->id) , array("class" => "btn btn-danger btn-xs" , "confirm" => "Confirm delete ?"));?>
+									<?php echo $this->Html->link(__("Edit") , array("action" => "edit" , $<%= $singularVar %>->id) , array("class" => "btn btn-default btn-xs"));?>
+									<?php echo $this->Html->link(__("Delete") , array("action" => "delete" , $<%= $singularVar %>->id) , array("class" => "btn btn-danger btn-xs" , "confirm" => "Confirm delete ?"));?>
 									</div>
 								</td>
 							</tr>
