@@ -7,5 +7,10 @@
     "license": "MIT",
     "require": {
         "cakephp/cakephp": "~3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Paanblogger\\Cakephp3BootstrapBake\\": "src"
+        }
     }
 }
