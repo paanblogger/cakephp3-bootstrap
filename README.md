@@ -1,3 +1,4 @@
 # cakephp3-bootstrap-bake
 
-To install : composer require paanblogger/cakephp3-bootstrap
+# Install
+Run command composer require paanblogger/cakephp3-bootstrap dev-master
