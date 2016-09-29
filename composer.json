@@ -1,22 +1,27 @@
 {
-    "name": "paanblogger/cakephp3-bootstrap-bake",
+    "name": "paanblogger/cakephp3-bootstrap",
     "description": "Custom libraries for CakePHP 3.x framework",
     "type": "cakephp-plugin",
     "keywords" : ["cakephp", "libraries"],
-    "homepage": "https://github.com/paanblogger/cakephp3-bootstrap-bake",
+    "homepage": "https://github.com/paanblogger/cakephp3-bootstrap",
     "license": "MIT",
     "require": {
         "cakephp/cakephp": "~3.1"
     },
     "autoload": {
 	    "psr-4": {
-	        "Paanblogger\\Cakephp3BootstrapBake\\": "src"
+	        "Paanblogger\\Cakephp3Bootstrap\\": "src"
 	    }
 	},
 	"autoload-dev": {
 	    "psr-4": {
-	        "Paanblogger\\Cakephp3BootstrapBake\\Test\\": "tests",
+	        "Paanblogger\\Cakephp3Bootstrap\\Test\\": "tests",
 	        "Cake\\Test\\" : "vendor/cakephp/cakephp/test"
 	    }
-	}
+	},
+	"config": {
+        "preferred-install": {
+            "*": "dist"
+        }
+    }
 }
