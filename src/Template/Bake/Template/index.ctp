@@ -12,7 +12,7 @@
 						<thead>
 							<tr>
 				<%	foreach ($fields as $field) { %>
-				<th><?php echo __("<%= $field %>"); ?></th>
+				<th><?php echo __("<%= ucfirst(str_replace("_" , " " , $field)) %>"); ?></th>
 				<% } %>
 				<th></th>
 							</tr>
